@@ -11,17 +11,18 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
-import Svg, {
-  Text as SvgText,
-  Defs,
-  LinearGradient,
-  Stop,
-} from "react-native-svg"; // Import Svg components
 
-export default function NavigationBar() {
+import { NavigationProp } from "@react-navigation/native";
+
+export default function NavigationBar({
+  navigation,
+}: {
+  navigation: NavigationProp<any>;
+}) {
   const { width } = useWindowDimensions(); // Get the screen width
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle the dropdown menu
   const dropdownHeight = useRef(new Animated.Value(0)).current; // Animated value for dropdown height
+
   const toggleMenu = () => {
     if (isMenuOpen) {
       // Animate closing the dropdown
@@ -63,10 +64,18 @@ export default function NavigationBar() {
         ) : (
           // Render links for larger screens
           <SafeAreaView style={styles.links}>
-            <Text style={styles.link} allowFontScaling={false}>
+            <Text
+              style={styles.link}
+              allowFontScaling={false}
+              onPress={() => navigation.navigate("Home")}
+            >
               STARTSEITE
             </Text>
-            <Text style={styles.link} allowFontScaling={false}>
+            <Text
+              style={styles.link}
+              allowFontScaling={false}
+              onPress={() => navigation.navigate("AboutUs")}
+            >
               ÜBER UNS
             </Text>
             <Text style={styles.link} allowFontScaling={false}>
@@ -91,10 +100,18 @@ export default function NavigationBar() {
         >
           {isMenuOpen && (
             <>
-              <Text style={styles.dropdownLink} allowFontScaling={false}>
+              <Text
+                style={styles.dropdownLink}
+                allowFontScaling={false}
+                onPress={() => navigation.navigate("Home")}
+              >
                 STARTSEITE
               </Text>
-              <Text style={styles.dropdownLink} allowFontScaling={false}>
+              <Text
+                style={styles.dropdownLink}
+                allowFontScaling={false}
+                onPress={() => navigation.navigate("AboutUs")}
+              >
                 ÜBER UNS
               </Text>
               <Text style={styles.dropdownLink} allowFontScaling={false}>
