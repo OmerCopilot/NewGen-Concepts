@@ -1,3 +1,4 @@
+import { NavigationProp } from "@react-navigation/native";
 import React from "react";
 import {
   SafeAreaView,
@@ -9,9 +10,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  navigation: NavigationProp<any>;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title} allowFontScaling={false}>
         Wir bringen ihr Unternehmen auf das nächste Level!
       </Text>
@@ -26,7 +31,7 @@ const HeroSection: React.FC = () => {
             styles.button,
             { backgroundColor: "#32E0A1", marginRight: height * 0.05 },
           ]} // Türkis
-          onPress={() => console.log("Über uns gedrückt")}
+          onPress={() => navigation.navigate("AboutUs")}
         >
           <Text style={[styles.buttonText, { color: "#000" }]}>Über uns</Text>
         </TouchableOpacity>
@@ -34,12 +39,12 @@ const HeroSection: React.FC = () => {
         {/* Blauer Button */}
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#0071e3" }]} // Blau
-          onPress={() => console.log("Kontakt gedrückt")}
+          onPress={() => navigation.navigate("Contacts")}
         >
           <Text style={styles.buttonText}>Kontakt</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default HeroSection;

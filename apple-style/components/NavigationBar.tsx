@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import { NavigationProp } from "@react-navigation/native";
+import styled from "styled-components/native";
 
 export default function NavigationBar({
   navigation,
@@ -22,6 +23,19 @@ export default function NavigationBar({
   const { width } = useWindowDimensions(); // Get the screen width
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle the dropdown menu
   const dropdownHeight = useRef(new Animated.Value(0)).current; // Animated value for dropdown height
+  const [isHovered, setIsHovered] = useState(false); // State to track hover
+  const hoverAnimation = useRef(new Animated.Value(0)).current; // Animated value for hover effect
+
+  const HoverableButton = styled.TouchableOpacity`
+    background-color: #3498db;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #2980b9;
+    }
+  `;
 
   const toggleMenu = () => {
     if (isMenuOpen) {
@@ -47,7 +61,7 @@ export default function NavigationBar({
   return (
     <>
       {/* Main Navbar */}
-      <SafeAreaView style={styles.navbar}>
+      <View style={styles.navbar}>
         <View style={styles.logoContainer}>
           <Image
             source={require("../assets/images/logo.jpg")}
@@ -63,7 +77,7 @@ export default function NavigationBar({
           </TouchableOpacity>
         ) : (
           // Render links for larger screens
-          <SafeAreaView style={styles.links}>
+          <View style={styles.links}>
             <Text
               style={styles.link}
               allowFontScaling={false}
@@ -85,18 +99,26 @@ export default function NavigationBar({
             >
               UNSERE LEISTUNGEN
             </Text>
-            <Text style={styles.link} allowFontScaling={false}>
+            <Text
+              style={styles.link}
+              allowFontScaling={false}
+              onPress={() => navigation.navigate("Projects")}
+            >
               PROJEKTE
             </Text>
-            <Text style={styles.link} allowFontScaling={false}>
+            <Text
+              style={styles.link}
+              allowFontScaling={false}
+              onPress={() => navigation.navigate("Contacts")}
+            >
               KONTAKT
             </Text>
             <Text style={styles.biggerLink} allowFontScaling={false}>
               ✉️ ANGEBOT
             </Text>
-          </SafeAreaView>
+          </View>
         )}
-      </SafeAreaView>
+      </View>
 
       {isPhoneSize && (
         <Animated.View
@@ -125,10 +147,18 @@ export default function NavigationBar({
               >
                 UNSERE LEISTUNGEN
               </Text>
-              <Text style={styles.dropdownLink} allowFontScaling={false}>
+              <Text
+                style={styles.dropdownLink}
+                allowFontScaling={false}
+                onPress={() => navigation.navigate("Projects")}
+              >
                 PROJEKTE
               </Text>
-              <Text style={styles.dropdownLink} allowFontScaling={false}>
+              <Text
+                style={styles.dropdownLink}
+                allowFontScaling={false}
+                onPress={() => navigation.navigate("Contacts")}
+              >
                 KONTAKT
               </Text>
             </>
@@ -156,7 +186,6 @@ const styles = StyleSheet.create({
   },
   secondNavbar: {
     backgroundColor: "#ffffff",
-    overflow: "hidden", // Prevent content overflow during animation
     paddingHorizontal: width * 0.05, // Adjust padding based on screen width
     borderBottomWidth: 1,
     borderBottomColor: "#e0e0e0",

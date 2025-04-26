@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { SafeAreaView, Animated, StyleSheet, Text } from "react-native";
 
-function AboutUs() {
+function Projects() {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   return (
@@ -20,7 +20,7 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default Projects;
 
 const styles = StyleSheet.create({
   container: {
