@@ -78,7 +78,11 @@ export default function NavigationBar({
             >
               ÜBER UNS
             </Text>
-            <Text style={styles.link} allowFontScaling={false}>
+            <Text
+              style={styles.link}
+              allowFontScaling={false}
+              onPress={() => navigation.navigate("OurFeatures")}
+            >
               UNSERE LEISTUNGEN
             </Text>
             <Text style={styles.link} allowFontScaling={false}>
@@ -114,7 +118,11 @@ export default function NavigationBar({
               >
                 ÜBER UNS
               </Text>
-              <Text style={styles.dropdownLink} allowFontScaling={false}>
+              <Text
+                style={styles.dropdownLink}
+                allowFontScaling={false}
+                onPress={() => navigation.navigate("OurFeatures")}
+              >
                 UNSERE LEISTUNGEN
               </Text>
               <Text style={styles.dropdownLink} allowFontScaling={false}>
